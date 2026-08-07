@@ -1,27 +1,171 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ---------------------------------------------------------------------------
+   Atreides design tokens
+
+   Brand palette (docs/03_DESIGN_SYSTEM.md):
+     Deep Navy    #0B1426   dominant background
+     Steel Blue   #28445F   secondary surfaces, borders, muted graphics
+     Signal Amber #F2A900   CTA, active states, highlighted zones
+     Cloud White  #F4F7F9   light text on dark, optional light sections
+     Graphite     #18202A   primary text on light surfaces
+
+   The palette keys avoid Tailwind's built-in scale names (e.g. `amber`) so the
+   default palette stays intact and brand colours are never used by accident.
+--------------------------------------------------------------------------- */
+
+@theme {
+  --color-navy: #0b1426;
+  --color-navy-deep: #070e1b;
+  --color-steel: #28445f;
+  --color-signal: #f2a900;
+  --color-cloud: #f4f7f9;
+  --color-graphite: #18202a;
+
+  /* Derived surfaces — tonal steps between Deep Navy and Steel Blue. */
+  --color-panel: #101b2e;
+  --color-panel-raised: #16233a;
+
+  /* Text tones verified against Deep Navy for WCAG AA (>= 4.5:1). */
+  --color-muted: #93a7bc; /* ~7.6:1 on Deep Navy */
+  --color-subtle: #7b92aa; /* ~5.8:1 on Deep Navy */
+  --color-graphite-muted: #4a5a6b; /* ~6.6:1 on Cloud White */
+
+  /* Critical status only — never used as a brand accent. */
+  --color-danger: #ff9d8c; /* ~9.6:1 on Deep Navy */
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-display: var(--font-manrope), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+
+  --radius-card: 1.25rem;
+  --radius-panel: 1.5rem;
+  --radius-btn: 0.75rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Anchor targets clear the sticky header. */
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-navy);
+    color: var(--color-cloud);
+    font-family: var(--font-sans);
+    /* Last-resort break for unbreakable strings such as long placeholders. */
+    overflow-wrap: break-word;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    /*
+     * German compounds like "Sicherheitsentscheidungen" are wider than a
+     * 320 px viewport at display sizes. Automatic hyphenation (the document is
+     * lang="de") breaks them at correct syllable boundaries and, unlike
+     * overflow-wrap, also shrinks the element's min-content width — which is
+     * what keeps grid tracks from overflowing on narrow screens.
+     *
+     * The limit keeps it to genuinely oversized words: without it, balancing
+     * hyphenates ordinary ones too ("Ver-trauen", "Situatio-nen").
+     */
+    hyphens: auto;
+    hyphenate-limit-chars: 14 6 5;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-signal);
+    color: var(--color-navy);
+  }
+
+  /* A single, consistently visible focus ring everywhere. */
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+    border-radius: 0.25rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ---------------------------------------------------------------------------
+   Utilities
+--------------------------------------------------------------------------- */
+
+@utility bg-grid {
+  /* Restrained structural grid, echoing the logo's modular squares. */
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-steel) 26%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-steel) 26%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
 }
-´'
+
+@utility text-eyebrow {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------------------------
+   Motion — subtle, functional, and fully opt-out
+--------------------------------------------------------------------------- */
+
+@keyframes atreides-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.82);
+  }
+}
+
+@keyframes atreides-heat {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@utility animate-signal-pulse {
+  animation: atreides-pulse 2.4s ease-in-out infinite;
+}
+
+@utility animate-heat {
+  animation: atreides-heat 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

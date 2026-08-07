@@ -1,0 +1,202 @@
+import type { Metadata } from "next";
+
+import {
+  LegalLayout,
+  LegalList,
+  LegalSection,
+  Placeholder,
+} from "@/components/layout/LegalLayout";
+import { placeholders, siteConfig } from "@/lib/site";
+
+const description =
+  "Informationen zur Verarbeitung personenbezogener Daten beim Besuch der Atreides-Website.";
+
+export const metadata: Metadata = {
+  title: "Datenschutzerklärung",
+  description,
+  alternates: { canonical: "/datenschutz" },
+  // Without these, the page would inherit the landing page's Open Graph title.
+  openGraph: {
+    title: `Datenschutzerklärung — ${siteConfig.name}`,
+    description,
+    url: "/datenschutz",
+  },
+};
+
+/**
+ * This page describes the site exactly as it behaves today: a static site with
+ * no analytics, no cookies, self-hosted fonts and a contact form whose submit
+ * path is not connected. It must be revised once hosting and a form backend are
+ * decided.
+ */
+export default function DatenschutzPage() {
+  return (
+    <LegalLayout
+      title="Datenschutzerklärung"
+      intro="Diese Erklärung beschreibt, welche Daten beim Besuch dieser Website verarbeitet werden. Sie bildet den aktuellen technischen Stand der Website ab und ist bei Änderungen an Hosting oder Kontaktformular anzupassen."
+    >
+      <LegalSection heading="1. Verantwortliche Stelle">
+        <p>
+          Verantwortlich für die Datenverarbeitung auf dieser Website im Sinne der
+          Datenschutz-Grundverordnung (DSGVO) ist:
+        </p>
+        <LegalList
+          items={[
+            <Placeholder key="entity">{placeholders.entity}</Placeholder>,
+            <Placeholder key="address">{placeholders.address}</Placeholder>,
+            <>
+              E-Mail: <Placeholder>{placeholders.email}</Placeholder>
+            </>,
+          ]}
+        />
+        <p>
+          Ob eine Datenschutzbeauftragte oder ein Datenschutzbeauftragter benannt
+          ist, ist zu ergänzen:{" "}
+          <Placeholder>[DATENSCHUTZBEAUFTRAGTE PERSON ODER ENTFALLEN]</Placeholder>
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="2. Umfang der Verarbeitung auf dieser Website">
+        <p>
+          Diese Website ist eine statische Informationsseite. Es findet kein
+          Tracking statt, es werden keine Analyse- oder Marketingdienste
+          eingebunden und es werden keine Cookies zu Analyse- oder Werbezwecken
+          gesetzt.
+        </p>
+        <LegalList
+          items={[
+            "Keine Webanalyse und keine Reichweitenmessung.",
+            "Keine Werbe- oder Tracking-Cookies.",
+            "Keine Einbindung externer Skripte, Karten oder Videodienste.",
+            "Keine Social-Media-Plugins.",
+          ]}
+        />
+        <p>
+          Aus diesem Grund wird kein Cookie-Banner eingesetzt. Sollten künftig
+          einwilligungspflichtige Dienste ergänzt werden, ist diese Erklärung
+          entsprechend zu erweitern.
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="3. Hosting und Server-Logfiles">
+        <p>
+          Die Website wird bei einem externen Dienstleister gehostet:{" "}
+          <Placeholder>{placeholders.hosting}</Placeholder>
+        </p>
+        <p>
+          Beim Aufruf der Website verarbeitet der Hosting-Anbieter technisch
+          erforderliche Zugriffsdaten, die der Browser automatisch übermittelt.
+          Dazu gehören typischerweise:
+        </p>
+        <LegalList
+          items={[
+            "IP-Adresse des anfragenden Endgeräts",
+            "Datum und Uhrzeit des Zugriffs",
+            "aufgerufene Adresse und übertragene Datenmenge",
+            "Browsertyp und Betriebssystem",
+          ]}
+        />
+        <p>
+          Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Das berechtigte Interesse
+          liegt in der technisch fehlerfreien Bereitstellung und der Sicherheit der
+          Website.
+        </p>
+        <p>
+          Konkrete Speicherdauer, Auftragsverarbeitungsvertrag und Serverstandort
+          sind nach Auswahl des Hosting-Anbieters zu ergänzen:{" "}
+          <Placeholder>
+            [SPEICHERDAUER, AUFTRAGSVERARBEITUNG UND SERVERSTANDORT ERGÄNZEN]
+          </Placeholder>
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="4. Schriftarten">
+        <p>
+          Die verwendeten Schriftarten werden zusammen mit der Website ausgeliefert
+          und lokal geladen. Beim Aufruf der Seite wird deshalb keine Verbindung zu
+          Servern von Google Fonts hergestellt.
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="5. Kontaktformular">
+        <p>
+          Das auf der Startseite dargestellte Kontaktformular ist derzeit technisch
+          nicht angebunden. Eingaben werden ausschließlich im Browser verarbeitet,
+          nicht an einen Server übermittelt und nicht gespeichert.
+        </p>
+        <p>
+          Sobald ein Versandweg eingerichtet ist, wird diese Erklärung um Empfänger,
+          Rechtsgrundlage, Speicherdauer und eingesetzte Dienstleister ergänzt.
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="6. Kontaktaufnahme per E-Mail">
+        <p>
+          Wenn Sie uns per E-Mail kontaktieren, werden die von Ihnen übermittelten
+          Angaben zur Bearbeitung Ihrer Anfrage und für mögliche Anschlussfragen
+          verarbeitet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO bei
+          vertragsbezogenen Anfragen, andernfalls Art. 6 Abs. 1 lit. f DSGVO
+          aufgrund unseres berechtigten Interesses an der Beantwortung der Anfrage.
+        </p>
+        <p>
+          Die Daten werden gelöscht, sobald sie für die Zweckerreichung nicht mehr
+          erforderlich sind und keine gesetzlichen Aufbewahrungsfristen
+          entgegenstehen.
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="7. Weitergabe von Daten">
+        <p>
+          Eine Weitergabe Ihrer Daten an Dritte erfolgt nicht, mit Ausnahme des
+          eingesetzten Hosting-Anbieters im Rahmen der Auftragsverarbeitung sowie
+          gesetzlicher Verpflichtungen.
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="8. Ihre Rechte">
+        <p>Sie haben im Rahmen der gesetzlichen Voraussetzungen das Recht:</p>
+        <LegalList
+          items={[
+            "auf Auskunft über die zu Ihrer Person verarbeiteten Daten (Art. 15 DSGVO)",
+            "auf Berichtigung unrichtiger Daten (Art. 16 DSGVO)",
+            "auf Löschung (Art. 17 DSGVO)",
+            "auf Einschränkung der Verarbeitung (Art. 18 DSGVO)",
+            "auf Datenübertragbarkeit (Art. 20 DSGVO)",
+            "auf Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)",
+          ]}
+        />
+        <p>
+          Zur Ausübung dieser Rechte genügt eine Nachricht an{" "}
+          <Placeholder>{placeholders.email}</Placeholder>.
+        </p>
+        <p>
+          Unabhängig davon steht Ihnen ein Beschwerderecht bei einer
+          Datenschutz-Aufsichtsbehörde zu, insbesondere in dem Mitgliedstaat Ihres
+          Aufenthaltsorts, Ihres Arbeitsplatzes oder des Orts des mutmaßlichen
+          Verstoßes.
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="9. Hinweis zum Produkt">
+        <p>
+          Diese Datenschutzerklärung betrifft ausschließlich den Betrieb dieser
+          Website. Sie trifft keine Aussage über die Datenverarbeitung innerhalb der
+          Atreides-Plattform. Die datenschutzrechtliche Ausgestaltung des Produkts
+          wird gemeinsam mit Pilotpartnern und Fachberatung definiert und
+          gesondert dokumentiert.
+        </p>
+      </LegalSection>
+
+      <LegalSection heading="10. Stand und Änderungen">
+        <p>
+          Diese Datenschutzerklärung wird angepasst, sobald sich die technische
+          Umsetzung der Website ändert, insbesondere bei Auswahl des
+          Hosting-Anbieters oder Aktivierung des Kontaktformulars.
+        </p>
+        <p>
+          Stand: <Placeholder>{placeholders.lastUpdated}</Placeholder>
+        </p>
+      </LegalSection>
+    </LegalLayout>
+  );
+}

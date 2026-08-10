@@ -5,11 +5,12 @@ import {
   LegalList,
   LegalSection,
   Placeholder,
+  Value,
 } from "@/components/layout/LegalLayout";
-import { placeholders, siteConfig } from "@/lib/site";
+import { owner, ownerAddressInline, placeholders, siteConfig } from "@/lib/site";
 
 const description =
-  "Impressum und Anbieterkennzeichnung von Atreides. Die gesetzlich erforderlichen Angaben werden derzeit ergänzt.";
+  "Impressum und Anbieterkennzeichnung von Atreides gemäß § 5 Digitale-Dienste-Gesetz.";
 
 export const metadata: Metadata = {
   title: "Impressum",
@@ -23,6 +24,11 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * The operator is a natural person. § 5 DDG requires legal form, registry data
+ * and an authorised representative only for legal entities, so those rows are
+ * absent by design — not pending.
+ */
 export default function ImpressumPage() {
   return (
     <LegalLayout
@@ -30,58 +36,41 @@ export default function ImpressumPage() {
       intro="Anbieterkennzeichnung gemäß § 5 Digitale-Dienste-Gesetz (DDG)."
     >
       <LegalSection heading="Anbieter">
-        <LegalList
-          items={[
-            <>
-              Betreiber: <Placeholder>{placeholders.entity}</Placeholder>
-            </>,
-            <>
-              Anschrift: <Placeholder>{placeholders.address}</Placeholder>
-            </>,
-            <>
-              Vertretungsberechtigte Person:{" "}
-              <Placeholder>{placeholders.representative}</Placeholder>
-            </>,
-          ]}
-        />
+        <p>
+          <Value>{owner.name}</Value>
+        </p>
+        <address className="not-italic">
+          {owner.addressLines.map((line) => (
+            <span key={line} className="block">
+              {line}
+            </span>
+          ))}
+        </address>
+        <p>
+          Diese Website wird von {owner.name} als natürliche Person betrieben. Es
+          besteht derzeit keine Gesellschaft als Betreiberin der Website.
+        </p>
       </LegalSection>
 
       <LegalSection heading="Kontakt">
         <LegalList
           items={[
             <>
-              E-Mail: <Placeholder>{placeholders.email}</Placeholder>
-            </>,
-            <>
-              Telefon: <Placeholder>{placeholders.phone}</Placeholder>
-            </>,
-          ]}
-        />
-      </LegalSection>
-
-      <LegalSection heading="Registereintrag und Umsatzsteuer">
-        <LegalList
-          items={[
-            <>
-              Registereintrag: <Placeholder>{placeholders.registry}</Placeholder>
-            </>,
-            <>
-              Umsatzsteuer-Identifikationsnummer:{" "}
-              <Placeholder>{placeholders.vatId}</Placeholder>
+              E-Mail:{" "}
+              <a
+                href={`mailto:${owner.email}`}
+                className="font-semibold text-cloud underline underline-offset-2 hover:text-signal"
+              >
+                {owner.email}
+              </a>
             </>,
           ]}
         />
-        <p>
-          Sofern kein Registereintrag oder keine Umsatzsteuer-Identifikationsnummer
-          besteht, sind die entsprechenden Zeilen vor der Veröffentlichung zu
-          entfernen.
-        </p>
       </LegalSection>
 
       <LegalSection heading="Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV">
         <p>
-          <Placeholder>{placeholders.representative}</Placeholder>,{" "}
-          <Placeholder>{placeholders.address}</Placeholder>
+          <Value>{owner.name}</Value>, {ownerAddressInline}
         </p>
       </LegalSection>
 
@@ -102,8 +91,8 @@ export default function ImpressumPage() {
         <p>
           Ob eine Bereitschaft oder Verpflichtung zur Teilnahme an einem
           Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
-          besteht, ist vom Betreiber zu ergänzen:{" "}
-          <Placeholder>[ANGABE ZUR VERBRAUCHERSCHLICHTUNG ERGÄNZEN]</Placeholder>
+          besteht, ist noch zu ergänzen:{" "}
+          <Placeholder>{placeholders.consumerArbitration}</Placeholder>
         </p>
       </LegalSection>
 

@@ -18,8 +18,9 @@ const statements = [
 export function PositioningStrip() {
   return (
     <section
+      id="lagebild"
       aria-label="Positionierung"
-      className="border-y border-steel/30 bg-navy-deep"
+      className="scroll-mt-24 border-y border-steel/30 bg-navy-deep"
     >
       <Container>
         <ul className="grid divide-y divide-steel/25 sm:grid-cols-3 sm:divide-x sm:divide-y-0">

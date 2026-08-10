@@ -33,7 +33,12 @@ Risiken erkennen, bevor Situationen eskalieren.
 
 ### Supporting text
 
-Atreides analysiert Live-Daten bestehender Sicherheitskameras und unterstützt Security-Teams mit priorisierten Warnmeldungen, Heatmaps und relevanten Kontextinformationen.
+Atreides verwandelt bestehende Kameradaten in ein priorisiertes Lagebild für menschlich geführte Security-Teams.
+
+> Approved 2026-08-10. Replaces the earlier line “Atreides analysiert Live-Daten
+> bestehender Sicherheitskameras und unterstützt Security-Teams mit priorisierten
+> Warnmeldungen, Heatmaps und relevanten Kontextinformationen.&#8203;” The earlier
+> wording remains valid as body copy elsewhere.
 
 ### Primary CTA
 
@@ -170,13 +175,81 @@ Mehr Übersicht über stark frequentierte Bereiche, Tanzflächen, Zugänge und d
 
 Unterstützung bei der Beobachtung von Menschenströmen, Engstellen und schnell wechselnden Belastungssituationen.
 
-### Bierzelte und Eventhallen
+### Festzelte und Eventhallen
+
+> Renamed 2026-08-10 from “Bierzelte und Eventhallen”. Public-facing copy must
+> use *Festzelt/Festzelte*.
 
 Strukturierte Lagehinweise für unübersichtliche Innenräume mit hoher Besucherdichte.
 
 ### Security-Unternehmen
 
 Eine zentrale Entscheidungsgrundlage für Teams, die mehrere Kameras und Bereiche gleichzeitig betreuen.
+
+## Cinematic sequence
+
+The landing page opens with a scroll-driven sequence of six narrative states.
+These states are the structural foundation of the page: they are server
+rendered, and they double as the reduced-motion presentation, the no-JavaScript
+fallback and the Canvas-failure fallback. See the approved storyboard for the
+camera and motion direction.
+
+The sequence **demonstrates**; the sections after it **explain**. Wording must
+not be duplicated between the two.
+
+### 01 — Venue erfassen
+
+Eyebrow: `AI Venue Intelligence`
+
+Headline (page H1): `Risiken erkennen, bevor Situationen eskalieren.`
+
+Body: Atreides verwandelt bestehende Kameradaten in ein priorisiertes Lagebild für menschlich geführte Security-Teams.
+
+CTAs: `Pilotprojekt besprechen` / `Funktionsweise ansehen`
+
+### 02 — Dynamik erkennen
+
+Headline: Zwischen hunderten Bewegungen fällt eine Fläche auf.
+
+Body: Nicht einzelne Personen verändern das Bild, sondern der Raum um sie herum: Umstehende weichen aus, die Dichte verschiebt sich, eine Fläche wird ungewöhnlich.
+
+Transient annotation (unnumbered): `Auffällige Dynamik`
+
+### 03 — Zone priorisieren
+
+Headline: Aus dem Raum wird eine Struktur.
+
+Body: Bewegung wird zu Aktivität je Zone. Bewertet werden Flächen, nicht Menschen — hervorgehoben wird die Zone, deren Veränderung eine Prüfung rechtfertigt.
+
+### 04 — Kontext bereitstellen
+
+Headline: Ein Hinweis mit Kontext, keine Anweisung.
+
+Body: Zone, Verlauf und Priorität laufen an einer Stelle zusammen. Der Hinweis endet mit einem Prüfauftrag — nicht mit einer Maßnahme.
+
+### 05 — Menschlich prüfen
+
+Headline: Atreides trifft keine Sicherheitsentscheidungen.
+
+Body: Die Plattform priorisiert Situationen und liefert Kontext. Die finale Bewertung und jede Maßnahme bleiben beim verantwortlichen Security-Team.
+
+### Abschluss
+
+Headline: Aus vorhandenen Kameras wird operative Übersicht.
+
+Body: Erfasste Bereiche, interpretierte Aktivität, priorisierte Zone, bereitgestellter Kontext — und am Ende eine Entscheidung, die ein Mensch trifft.
+
+Persistent disclaimer: `Konzeptdarstellung der geplanten Oberfläche. Kein Screenshot eines produktiven Systems.`
+
+### Story-needle labels
+
+- `01 — Venue erfassen`
+- `02 — Dynamik erkennen`
+- `03 — Zone priorisieren`
+- `04 — Kontext bereitstellen`
+- `05 — Menschlich prüfen`
+
+`Auffällige Dynamik` stays unnumbered so the chain remains five steps.
 
 ## Human control
 
@@ -186,11 +259,15 @@ Human in the loop
 
 ### Headline
 
-Atreides trifft keine Sicherheitsentscheidungen.
+Warum die Entscheidung beim Team bleibt.
+
+> Changed 2026-08-10. The original headline “Atreides trifft keine
+> Sicherheitsentscheidungen.&#8203;” now carries state 05 of the cinematic
+> sequence. This section explains the reasoning instead of restating the claim.
 
 ### Body
 
-Die Plattform fokussiert Aufmerksamkeit und stellt Kontext bereit. Sie klassifiziert keine Person als gefährlich, löst keine eigenständigen Maßnahmen aus und ersetzt nicht die professionelle Einschätzung des Security-Teams.
+Ein System, das Situationen bewertet, verschiebt Verantwortung. Atreides ist deshalb so angelegt, dass es Aufmerksamkeit lenkt und Kontext aufbereitet — und überall dort, wo eine Einschätzung nötig wird, an einen Menschen übergibt. Es klassifiziert keine Person als gefährlich und löst keine eigenständigen Maßnahmen aus.
 
 ### Principles
 

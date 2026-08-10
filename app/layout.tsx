@@ -54,6 +54,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="de"
       data-scroll-behavior="smooth"
+      // The cinematic sequence adds a class here before hydration to pick its
+      // presentation mode without a layout flash; that is an expected mismatch.
+      suppressHydrationWarning
       className={`${inter.variable} ${manrope.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-navy text-cloud">

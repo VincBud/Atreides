@@ -99,7 +99,7 @@ Four cards:
 
 - Clubs und Nachtgastronomie
 - Festivals und Großveranstaltungen
-- Bierzelte und Eventhallen
+- Festzelte und Eventhallen
 - Security-Unternehmen
 
 ### 8. Human control

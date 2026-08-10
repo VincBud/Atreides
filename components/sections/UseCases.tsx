@@ -11,7 +11,7 @@ const useCases = [
     body: "Unterstützung bei der Beobachtung von Menschenströmen, Engstellen und schnell wechselnden Belastungssituationen.",
   },
   {
-    title: "Bierzelte und Eventhallen",
+    title: "Festzelte und Eventhallen",
     body: "Strukturierte Lagehinweise für unübersichtliche Innenräume mit hoher Besucherdichte.",
   },
   {

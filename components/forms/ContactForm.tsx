@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useId, useRef, useState, type ReactNode, type SubmitEvent } from "react";
 
-import { placeholders } from "@/lib/site";
+import { owner } from "@/lib/site";
 
 /**
  * Frontend-only contact form.
@@ -39,7 +39,7 @@ const INITIAL_VALUES: Values = {
 const VENUE_TYPES = [
   "Club / Nachtgastronomie",
   "Festival / Großveranstaltung",
-  "Bierzelt / Eventhalle",
+  "Festzelt / Eventhalle",
   "Security-Unternehmen",
   "Sonstige",
 ];
@@ -369,9 +369,12 @@ export function ContactForm() {
                 gesendet und nichts gespeichert. Ihre Eingaben bleiben in diesem
                 Formular stehen. Bitte kontaktieren Sie uns bis zur Freigabe direkt
                 per E-Mail:{" "}
-                <span className="font-semibold text-cloud">
-                  {placeholders.email}
-                </span>
+                <a
+                  href={`mailto:${owner.email}`}
+                  className="font-semibold text-cloud underline underline-offset-2 hover:text-signal"
+                >
+                  {owner.email}
+                </a>
               </p>
             </div>
           ) : null}

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { Container } from "@/components/ui/Container";
 import { LogoImage } from "@/components/ui/Logo";
-import { placeholders, siteConfig } from "@/lib/site";
+import { owner, siteConfig } from "@/lib/site";
 
 const legalLinks = [
   { label: "Impressum", href: "/impressum" },
@@ -25,12 +25,24 @@ export function Footer() {
           <div className="grid gap-10 sm:grid-cols-2 lg:gap-16">
             <div>
               <h2 className="text-eyebrow text-subtle">Kontakt</h2>
-              <ul className="mt-4 space-y-2 text-sm text-muted">
-                <li>{placeholders.entity}</li>
-                <li className="whitespace-pre-line">{placeholders.address}</li>
-                <li>{placeholders.email}</li>
-                <li>{placeholders.phone}</li>
-              </ul>
+              <div className="mt-4 space-y-2 text-sm text-muted">
+                <p>{owner.name}</p>
+                <address className="not-italic">
+                  {owner.addressLines.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </address>
+                <p>
+                  <a
+                    href={`mailto:${owner.email}`}
+                    className="inline-flex min-h-9 items-center transition-colors hover:text-signal"
+                  >
+                    {owner.email}
+                  </a>
+                </p>
+              </div>
             </div>
 
             <div>

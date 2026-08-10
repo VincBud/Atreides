@@ -122,6 +122,277 @@
 }
 
 /* ---------------------------------------------------------------------------
+   Cinematic sequence
+
+   Two presentations of one DOM tree.
+
+   Default (this block's base rules) is the static narrative: six stacked
+   states, each with a still frame. That is what the server renders, what a
+   crawler indexes, what a screen reader reads, and what a visitor sees with
+   reduced motion, without JavaScript, or when Canvas fails.
+
+   `html.cine` upgrades the same markup into the sticky camera flight. The
+   class is set by a tiny inline script before first paint, so there is no
+   layout jump between the two.
+--------------------------------------------------------------------------- */
+
+/* In the static presentation the overlay is just page content and needs the
+   shared container measure; in cinematic mode it is a full-bleed stage. */
+[data-cine-overlay] {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 80rem;
+  padding: 4rem 1.25rem 5rem;
+}
+
+@media (min-width: 640px) {
+  [data-cine-overlay] {
+    padding-inline: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  [data-cine-overlay] {
+    padding-inline: 3rem;
+  }
+}
+
+[data-cine-states] {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+[data-cine-state] {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  [data-cine-states] {
+    gap: 7rem;
+  }
+  [data-cine-state] {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: 3.5rem;
+  }
+  /* The opening state leads with the headline, not the frame. */
+  [data-cine-state="0"] [data-cine-copy] {
+    order: -1;
+  }
+}
+
+[data-cine-copy] {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  align-items: flex-start;
+}
+
+[data-cine-still] {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border: 1px solid color-mix(in srgb, var(--color-steel) 55%, transparent);
+  border-radius: var(--radius-card);
+  background:
+    radial-gradient(120% 90% at 50% 0%, #0d1729, var(--color-navy-deep));
+}
+
+[data-cine-still-canvas] {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 400ms ease;
+}
+
+[data-cine-still-canvas][data-painted="true"] {
+  opacity: 1;
+}
+
+[data-cine-film],
+[data-cine-steps],
+[data-cine-skip] {
+  display: none;
+}
+
+[data-cine-disclaimer] {
+  margin-top: 2.5rem;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--color-subtle);
+}
+
+/* --- cinematic upgrade ------------------------------------------------- */
+
+html.cine [data-cine-track] {
+  position: relative;
+  height: 520vh;
+}
+
+html.cine [data-cine-stage] {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+html.cine [data-cine-film] {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+html.cine [data-cine-overlay] {
+  position: absolute;
+  inset: 0;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  pointer-events: none;
+}
+
+html.cine [data-cine-overlay] a,
+html.cine [data-cine-overlay] button {
+  pointer-events: auto;
+}
+
+html.cine [data-cine-states] {
+  display: block;
+  gap: 0;
+}
+
+/* The copy keeps the lower band; the terminal chrome keeps the upper one. */
+html.cine [data-cine-state] {
+  position: absolute;
+  inset: auto 5.5% 6%;
+  display: block;
+  max-width: 34rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(0.75rem);
+  transition:
+    opacity 520ms ease,
+    transform 520ms ease,
+    visibility 0s linear 520ms;
+}
+
+html.cine [data-cine-stage][data-cine-scene="0"] [data-cine-state="0"],
+html.cine [data-cine-stage][data-cine-scene="1"] [data-cine-state="1"],
+html.cine [data-cine-stage][data-cine-scene="2"] [data-cine-state="2"],
+html.cine [data-cine-stage][data-cine-scene="3"] [data-cine-state="3"],
+html.cine [data-cine-stage][data-cine-scene="4"] [data-cine-state="4"],
+html.cine [data-cine-stage][data-cine-scene="5"] [data-cine-state="5"] {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+html.cine [data-cine-still] {
+  display: none;
+}
+
+/* The needle stays in the flow at the head of the copy block. Its hairline is
+   measured on each state change and the canvas continues the line from exactly
+   that point, so label and leader read as one annotation. */
+html.cine [data-cine-needle] {
+  margin: 0 0 0.35rem;
+}
+
+html.cine [data-cine-copy] {
+  gap: 0.85rem;
+}
+
+html.cine [data-cine-disclaimer] {
+  position: absolute;
+  right: 5.5%;
+  bottom: 4%;
+  margin: 0;
+  max-width: 22rem;
+  text-align: right;
+  font-size: 0.6875rem;
+}
+
+html.cine [data-cine-skip] {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  z-index: 5;
+  display: block;
+  translate: -50% 0;
+  padding: 0.5rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--color-steel) 70%, transparent);
+  border-radius: var(--radius-btn);
+  background: color-mix(in srgb, var(--color-navy) 88%, transparent);
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+  opacity: 0;
+  pointer-events: none;
+}
+
+html.cine [data-cine-skip]:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (min-width: 900px) {
+  html.cine [data-cine-track] {
+    height: 700vh;
+  }
+  html.cine [data-cine-state] {
+    inset: auto auto 7% 5.5%;
+    max-width: 33rem;
+  }
+}
+
+/* Narrow screens: the needle becomes a compact persistent step indicator,
+   because a leader line into the scene has nowhere useful to land. */
+@media (max-width: 719px) {
+  html.cine [data-cine-needle] {
+    display: none;
+  }
+  html.cine [data-cine-steps] {
+    position: absolute;
+    left: 6%;
+    bottom: 7%;
+    display: flex;
+  }
+  html.cine [data-cine-state] {
+    inset: auto 6% 12%;
+    max-width: none;
+  }
+  html.cine [data-cine-state] h1 {
+    font-size: 1.875rem;
+  }
+  html.cine [data-cine-state] h2 {
+    font-size: 1.5rem;
+  }
+  html.cine [data-cine-state] p {
+    font-size: 0.9375rem;
+  }
+  html.cine [data-cine-disclaimer] {
+    left: 6%;
+    right: 6%;
+    bottom: 2%;
+    max-width: none;
+    text-align: left;
+    font-size: 0.625rem;
+  }
+}
+
+/* ---------------------------------------------------------------------------
    Motion — subtle, functional, and fully opt-out
 --------------------------------------------------------------------------- */
 

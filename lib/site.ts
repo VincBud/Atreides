@@ -1,7 +1,7 @@
 /**
  * Central site configuration.
  *
- * Values marked as placeholders must be replaced by the site owner before
+ * Values still marked as placeholders must be replaced by the site owner before
  * launch. They are intentionally left as visible bracketed strings so that
  * missing information is impossible to overlook in the rendered output.
  */
@@ -18,17 +18,33 @@ export const siteConfig = {
     "AI Venue Intelligence für mehr Übersicht und menschlich geführte Sicherheitsentscheidungen.",
 } as const;
 
+/**
+ * Legal operator of the website.
+ *
+ * The site is operated by Vincent Fitsch as a natural person — there is no
+ * company, no registry entry and no VAT ID behind it. § 5 DDG requires legal
+ * form and an authorised representative only for legal entities, so those rows
+ * are omitted entirely rather than rendered empty or as "nicht vorhanden".
+ * No telephone number is published by choice.
+ */
+export const owner = {
+  name: "Vincent Fitsch",
+  addressLines: ["Birkenweg 7a", "83064 Raubling", "Deutschland"],
+  /** Single contact address used in Impressum, privacy policy and on the page. */
+  email: "vincentfitsch@gmail.com",
+} as const;
+
+/** One-line address for inline use in running text. */
+export const ownerAddressInline = owner.addressLines.join(", ");
+
 /** Owner inputs that are still outstanding. Rendered verbatim on the site. */
 export const placeholders = {
-  entity: "[RECHTSFORM / BETREIBER ERGÄNZEN]",
-  address: "[VOLLSTÄNDIGE ANSCHRIFT ERGÄNZEN]",
-  representative: "[VERTRETUNGSBERECHTIGTE PERSON ERGÄNZEN]",
-  email: "[GESCHÄFTLICHE E-MAIL ERGÄNZEN]",
-  phone: "[TELEFON OPTIONAL ERGÄNZEN]",
   hosting: "[HOSTING-ANBIETER ERGÄNZEN]",
-  registry: "[REGISTERGERICHT UND REGISTERNUMMER ERGÄNZEN]",
-  vatId: "[UMSATZSTEUER-ID ERGÄNZEN, FALLS VORHANDEN]",
-  lastUpdated: "[STAND / DATUM ERGÄNZEN]",
+  hostingDetails:
+    "[SPEICHERDAUER, AUFTRAGSVERARBEITUNG UND SERVERSTANDORT ERGÄNZEN]",
+  consumerArbitration: "[ANGABE ZUR VERBRAUCHERSCHLICHTUNG ERGÄNZEN]",
+  /** Set to the actual public launch date when the site goes live. */
+  lastUpdated: "[VERÖFFENTLICHUNGSDATUM ERGÄNZEN]",
 } as const;
 
 export type NavItem = {

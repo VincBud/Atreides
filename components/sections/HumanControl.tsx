@@ -18,15 +18,15 @@ const chain = [
 export function HumanControl() {
   return (
     <Section id="verantwortung" tone="light" labelledBy="humancontrol-headline">
-      {/* The core statement spans the full column so it is never hyphenated
-          and stays the visual peak of the page. */}
+      {/* The cinematic sequence states the principle. This section explains
+          the reasoning behind it, deliberately in different words. */}
       <SectionHeading
         id="humancontrol-headline"
         eyebrow="Human in the loop"
-        headline="Atreides trifft keine Sicherheitsentscheidungen."
+        headline="Warum die Entscheidung beim Team bleibt."
         tone="light"
         className="max-w-4xl"
-        intro="Die Plattform fokussiert Aufmerksamkeit und stellt Kontext bereit. Sie klassifiziert keine Person als gefährlich, löst keine eigenständigen Maßnahmen aus und ersetzt nicht die professionelle Einschätzung des Security-Teams."
+        intro="Ein System, das Situationen bewertet, verschiebt Verantwortung. Atreides ist deshalb so angelegt, dass es Aufmerksamkeit lenkt und Kontext aufbereitet — und überall dort, wo eine Einschätzung nötig wird, an einen Menschen übergibt. Es klassifiziert keine Person als gefährlich und löst keine eigenständigen Maßnahmen aus."
       />
 
       <div className="mt-14 grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-20">

@@ -1,5 +1,5 @@
+import { CinematicSequence } from "@/components/cinematic/CinematicSequence";
 import { Contact } from "@/components/sections/Contact";
-import { Hero } from "@/components/sections/Hero";
 import { HumanControl } from "@/components/sections/HumanControl";
 import { PilotProgram } from "@/components/sections/PilotProgram";
 import { PositioningStrip } from "@/components/sections/PositioningStrip";
@@ -12,7 +12,8 @@ import { Workflow } from "@/components/sections/Workflow";
 export default function Home() {
   return (
     <main id="inhalt" className="flex-1">
-      <Hero />
+      {/* The film demonstrates the product; the sections below explain it. */}
+      <CinematicSequence />
       <PositioningStrip />
       <Problem />
       <Solution />

@@ -91,11 +91,20 @@ export function LegalList({ items }: { items: readonly ReactNode[] }) {
   );
 }
 
-/** Visually marks an outstanding owner input inside body copy. */
+/** A supplied, final value inside body copy. */
+export function Value({ children }: { children: ReactNode }) {
+  return <strong className="font-semibold text-cloud">{children}</strong>;
+}
+
+/**
+ * An outstanding owner input. Marked distinctly from supplied values so the
+ * remaining gaps cannot be mistaken for finished content — the bracketed
+ * "ERGÄNZEN" wording carries the meaning without relying on colour.
+ */
 export function Placeholder({ children }: { children: ReactNode }) {
   return (
-    <span className="font-semibold text-cloud">
+    <mark className="rounded-[4px] bg-signal/15 px-1.5 py-0.5 font-semibold text-signal">
       {children}
-    </span>
+    </mark>
   );
 }

@@ -19,10 +19,13 @@ const steps = [
 export function Workflow() {
   return (
     <Section id="funktionsweise" tone="deep" labelledBy="workflow-headline">
+      {/* The cinematic sequence demonstrates this flow; here it is named and
+          explained for readers who scan rather than watch. */}
       <SectionHeading
         id="workflow-headline"
         eyebrow="Funktionsweise"
         headline="Drei Schritte zu mehr operativer Übersicht."
+        intro="Der technische Ablauf hinter dem Lagebild — von der vorhandenen Datenquelle bis zum Prüfauftrag an das Team."
       />
 
       <ol className="relative mt-14 grid gap-4 lg:mt-16 lg:grid-cols-3 lg:gap-6">

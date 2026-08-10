@@ -1,7 +1,7 @@
 import { ContactForm } from "@/components/forms/ContactForm";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { placeholders } from "@/lib/site";
+import { owner } from "@/lib/site";
 
 const expectations = [
   "Ein kurzes Gespräch über Ihre Venue, bestehende Kameras und relevante Bereiche.",
@@ -36,12 +36,15 @@ export function Contact() {
           <div className="mt-10 rounded-card border border-steel/40 bg-panel/40 p-5">
             <h3 className="text-eyebrow text-subtle">Direkter Kontakt</h3>
             <p className="mt-3 text-sm leading-relaxed text-muted">
-              E-Mail:{" "}
-              <span className="font-semibold text-cloud">{placeholders.email}</span>
-              <br />
-              Telefon:{" "}
-              <span className="font-semibold text-cloud">{placeholders.phone}</span>
+              Solange das Formular noch nicht verbunden ist, erreichen Sie uns
+              direkt per E-Mail:
             </p>
+            <a
+              href={`mailto:${owner.email}`}
+              className="mt-2 inline-flex min-h-9 items-center font-semibold text-cloud underline underline-offset-2 transition-colors hover:text-signal"
+            >
+              {owner.email}
+            </a>
           </div>
         </div>
 

@@ -5,8 +5,9 @@ import {
   LegalList,
   LegalSection,
   Placeholder,
+  Value,
 } from "@/components/layout/LegalLayout";
-import { placeholders, siteConfig } from "@/lib/site";
+import { owner, placeholders, siteConfig } from "@/lib/site";
 
 const description =
   "Informationen zur Verarbeitung personenbezogener Daten beim Besuch der Atreides-Website.";
@@ -40,19 +41,24 @@ export default function DatenschutzPage() {
           Verantwortlich für die Datenverarbeitung auf dieser Website im Sinne der
           Datenschutz-Grundverordnung (DSGVO) ist:
         </p>
-        <LegalList
-          items={[
-            <Placeholder key="entity">{placeholders.entity}</Placeholder>,
-            <Placeholder key="address">{placeholders.address}</Placeholder>,
-            <>
-              E-Mail: <Placeholder>{placeholders.email}</Placeholder>
-            </>,
-          ]}
-        />
         <p>
-          Ob eine Datenschutzbeauftragte oder ein Datenschutzbeauftragter benannt
-          ist, ist zu ergänzen:{" "}
-          <Placeholder>[DATENSCHUTZBEAUFTRAGTE PERSON ODER ENTFALLEN]</Placeholder>
+          <Value>{owner.name}</Value>
+        </p>
+        <address className="not-italic">
+          {owner.addressLines.map((line) => (
+            <span key={line} className="block">
+              {line}
+            </span>
+          ))}
+        </address>
+        <p>
+          E-Mail:{" "}
+          <a
+            href={`mailto:${owner.email}`}
+            className="font-semibold text-cloud underline underline-offset-2 hover:text-signal"
+          >
+            {owner.email}
+          </a>
         </p>
       </LegalSection>
 
@@ -104,9 +110,7 @@ export default function DatenschutzPage() {
         <p>
           Konkrete Speicherdauer, Auftragsverarbeitungsvertrag und Serverstandort
           sind nach Auswahl des Hosting-Anbieters zu ergänzen:{" "}
-          <Placeholder>
-            [SPEICHERDAUER, AUFTRAGSVERARBEITUNG UND SERVERSTANDORT ERGÄNZEN]
-          </Placeholder>
+          <Placeholder>{placeholders.hostingDetails}</Placeholder>
         </p>
       </LegalSection>
 
@@ -167,7 +171,13 @@ export default function DatenschutzPage() {
         />
         <p>
           Zur Ausübung dieser Rechte genügt eine Nachricht an{" "}
-          <Placeholder>{placeholders.email}</Placeholder>.
+          <a
+            href={`mailto:${owner.email}`}
+            className="font-semibold text-cloud underline underline-offset-2 hover:text-signal"
+          >
+            {owner.email}
+          </a>
+          .
         </p>
         <p>
           Unabhängig davon steht Ihnen ein Beschwerderecht bei einer

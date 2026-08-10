@@ -4,10 +4,9 @@ import {
   LegalLayout,
   LegalList,
   LegalSection,
-  Placeholder,
   Value,
 } from "@/components/layout/LegalLayout";
-import { owner, placeholders, siteConfig } from "@/lib/site";
+import { hosting, legalLastUpdated, owner, siteConfig } from "@/lib/site";
 
 const description =
   "Informationen zur Verarbeitung personenbezogener Daten beim Besuch der Atreides-Website.";
@@ -25,10 +24,10 @@ export const metadata: Metadata = {
 };
 
 /**
- * This page describes the site exactly as it behaves today: a static site with
- * no analytics, no cookies, self-hosted fonts and a contact form whose submit
- * path is not connected. It must be revised once hosting and a form backend are
- * decided.
+ * This page describes the site exactly as it behaves today: a static site on
+ * Vercel with no analytics, no cookies, self-hosted fonts and a contact form
+ * whose submit path is not connected. It must be revised the moment a form
+ * backend or any additional service is added.
  */
 export default function DatenschutzPage() {
   return (
@@ -84,14 +83,18 @@ export default function DatenschutzPage() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="3. Hosting und Server-Logfiles">
+      {/*
+        Deliberately limited to what has been verified: the provider, the fact
+        that access data is processed on request, the legal basis, and that we
+        keep no logs of our own. Retention periods, deployment region, the DPA
+        and any transfer mechanism are NOT stated because none of them have been
+        confirmed — see the note on `hosting` in lib/site.ts before extending.
+      */}
+      <LegalSection heading="3. Hosting und Zugriffsdaten">
         <p>
-          Die Website wird bei einem externen Dienstleister gehostet:{" "}
-          <Placeholder>{placeholders.hosting}</Placeholder>
-        </p>
-        <p>
-          Beim Aufruf der Website verarbeitet der Hosting-Anbieter technisch
-          erforderliche Zugriffsdaten, die der Browser automatisch übermittelt.
+          Diese Website wird bei <Value>{hosting.provider}</Value> gehostet. Der
+          Hosting-Anbieter stellt die Website technisch bereit und verarbeitet
+          dabei die Daten, die Ihr Browser beim Aufruf automatisch übermittelt.
           Dazu gehören typischerweise:
         </p>
         <LegalList
@@ -104,13 +107,13 @@ export default function DatenschutzPage() {
         />
         <p>
           Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Das berechtigte Interesse
-          liegt in der technisch fehlerfreien Bereitstellung und der Sicherheit der
+          liegt in der technisch fehlerfreien und sicheren Bereitstellung der
           Website.
         </p>
         <p>
-          Konkrete Speicherdauer, Auftragsverarbeitungsvertrag und Serverstandort
-          sind nach Auswahl des Hosting-Anbieters zu ergänzen:{" "}
-          <Placeholder>{placeholders.hostingDetails}</Placeholder>
+          Diese Zugriffsdaten werden von uns weder gespeichert noch ausgewertet.
+          Wir betreiben keine eigene Protokollierung, keine Analyse und keine
+          serverseitige Verarbeitung von Besucherdaten.
         </p>
       </LegalSection>
 
@@ -150,10 +153,11 @@ export default function DatenschutzPage() {
       </LegalSection>
 
       <LegalSection heading="7. Weitergabe von Daten">
+        {/* No claim about a processing agreement: its existence is unverified. */}
         <p>
-          Eine Weitergabe Ihrer Daten an Dritte erfolgt nicht, mit Ausnahme des
-          eingesetzten Hosting-Anbieters im Rahmen der Auftragsverarbeitung sowie
-          gesetzlicher Verpflichtungen.
+          Eine Weitergabe Ihrer Daten an Dritte erfolgt nicht. Ausgenommen ist der
+          Hosting-Anbieter, der die Website technisch bereitstellt, sowie eine
+          Weitergabe aufgrund gesetzlicher Verpflichtungen.
         </p>
       </LegalSection>
 
@@ -200,11 +204,11 @@ export default function DatenschutzPage() {
       <LegalSection heading="10. Stand und Änderungen">
         <p>
           Diese Datenschutzerklärung wird angepasst, sobald sich die technische
-          Umsetzung der Website ändert, insbesondere bei Auswahl des
-          Hosting-Anbieters oder Aktivierung des Kontaktformulars.
+          Umsetzung der Website ändert — insbesondere bei Aktivierung des
+          Kontaktformulars oder bei Einbindung weiterer Dienste.
         </p>
         <p>
-          Stand: <Placeholder>{placeholders.lastUpdated}</Placeholder>
+          Stand: <Value>{legalLastUpdated}</Value>
         </p>
       </LegalSection>
     </LegalLayout>

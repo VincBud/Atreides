@@ -1,9 +1,9 @@
 /**
  * Central site configuration.
  *
- * Values still marked as placeholders must be replaced by the site owner before
- * launch. They are intentionally left as visible bracketed strings so that
- * missing information is impossible to overlook in the rendered output.
+ * Single source of truth for the operator's legal data, the production domain
+ * and the hosting provider. Nothing here is a placeholder any more — if a value
+ * is unknown, it is omitted from the site rather than shown as a gap.
  */
 
 export const siteConfig = {
@@ -37,15 +37,29 @@ export const owner = {
 /** One-line address for inline use in running text. */
 export const ownerAddressInline = owner.addressLines.join(", ");
 
-/** Owner inputs that are still outstanding. Rendered verbatim on the site. */
-export const placeholders = {
-  hosting: "[HOSTING-ANBIETER ERGÄNZEN]",
-  hostingDetails:
-    "[SPEICHERDAUER, AUFTRAGSVERARBEITUNG UND SERVERSTANDORT ERGÄNZEN]",
-  consumerArbitration: "[ANGABE ZUR VERBRAUCHERSCHLICHTUNG ERGÄNZEN]",
-  /** Set to the actual public launch date when the site goes live. */
-  lastUpdated: "[VERÖFFENTLICHUNGSDATUM ERGÄNZEN]",
+/**
+ * Production infrastructure, as actually deployed.
+ *
+ * OWNER VERIFICATION STILL OUTSTANDING — deliberately not stated on the public
+ * privacy page, because none of it has been confirmed:
+ *   - whether a data processing agreement (AVV/DPA) with the provider is in place
+ *   - the deployment region and where access data is actually processed
+ *   - how long the provider retains access logs
+ *   - the mechanism relied on for any transfer outside the EU/EEA
+ * The privacy policy is written so it remains accurate without them. Once
+ * confirmed, extend section 3 of app/datenschutz/page.tsx.
+ */
+export const hosting = {
+  provider: "Vercel",
 } as const;
+
+/**
+ * Editorial revision date of the legal pages.
+ *
+ * Static on purpose: deriving it from the current date would silently claim the
+ * documents were reviewed on every request.
+ */
+export const legalLastUpdated = "10. August 2026";
 
 export type NavItem = {
   label: string;

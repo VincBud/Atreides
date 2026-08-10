@@ -4,10 +4,9 @@ import {
   LegalLayout,
   LegalList,
   LegalSection,
-  Placeholder,
   Value,
 } from "@/components/layout/LegalLayout";
-import { owner, ownerAddressInline, placeholders, siteConfig } from "@/lib/site";
+import { owner, ownerAddressInline, siteConfig } from "@/lib/site";
 
 const description =
   "Impressum und Anbieterkennzeichnung von Atreides gemäß § 5 Digitale-Dienste-Gesetz.";
@@ -74,27 +73,18 @@ export default function ImpressumPage() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="Streitbeilegung">
-        <p>
-          Die Europäische Kommission stellt eine Plattform zur
-          Online-Streitbeilegung bereit. Diese finden Sie unter{" "}
-          <a
-            href="https://ec.europa.eu/consumers/odr/"
-            className="text-cloud underline underline-offset-2 hover:text-signal"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            ec.europa.eu/consumers/odr
-          </a>
-          .
-        </p>
-        <p>
-          Ob eine Bereitschaft oder Verpflichtung zur Teilnahme an einem
-          Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
-          besteht, ist noch zu ergänzen:{" "}
-          <Placeholder>{placeholders.consumerArbitration}</Placeholder>
-        </p>
-      </LegalSection>
+      {/*
+        A "Streitbeilegung" section was removed before launch rather than
+        shipped with an unfilled placeholder. Two reasons, both to be confirmed
+        by the owner:
+          - The § 36 VSBG declaration is addressed at consumer business. This is
+            a B2B site with no consumer contracts and no online sales, and the
+            operator is a sole natural person.
+          - The EU ODR platform the previous text linked to was discontinued, so
+            keeping the link would point visitors at a dead service.
+        If a consumer-facing offering is ever added, this section must come back
+        with the operator's own declaration — it cannot be written for them.
+      */}
 
       <LegalSection heading="Haftung für Inhalte und Links">
         <p>

@@ -378,12 +378,27 @@ AI Venue Intelligence für mehr Übersicht und menschlich geführte Sicherheitse
 - Datenschutz
 - Kontakt
 
-## Legal placeholders
+## Legal data
 
-Use explicit placeholders:
+Resolved 2026-08-10. There are no bracketed placeholders left on the public
+site. The single source of truth is `owner` in `lib/site.ts`:
 
-- `[RECHTSFORM / BETREIBER ERGÄNZEN]`
-- `[VOLLSTÄNDIGE ANSCHRIFT ERGÄNZEN]`
-- `[VERTRETUNGSBERECHTIGTE PERSON ERGÄNZEN]`
-- `[GESCHÄFTLICHE E-MAIL ERGÄNZEN]`
-- `[TELEFON OPTIONAL ERGÄNZEN]`
+- Operator: Vincent Fitsch, as a natural person
+- Address: Birkenweg 7a, 83064 Raubling, Deutschland
+- Contact: vincentfitsch@gmail.com
+- Hosting: Vercel (`hosting` in `lib/site.ts`)
+- Legal pages last revised: 10. August 2026 (`legalLastUpdated`)
+
+Deliberately **not** shown, because they do not exist:
+
+- Rechtsform / Gesellschaft — the operator is a natural person
+- Vertretungsberechtigte Person — only required for legal entities
+- Handelsregister, Umsatzsteuer-ID
+- Telefonnummer
+- Datenschutzbeauftragte:r
+
+Do not reintroduce these as placeholders. Add them only when real values exist.
+
+Still unverified and therefore absent from the privacy policy: data processing
+agreement with the host, deployment region, log retention, and any third-country
+transfer mechanism. See the note on `hosting` in `lib/site.ts`.

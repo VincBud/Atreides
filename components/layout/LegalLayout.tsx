@@ -38,16 +38,11 @@ export function LegalLayout({ title, intro, children }: LegalLayoutProps) {
           </h1>
           <p className="mt-6 text-base leading-relaxed text-muted">{intro}</p>
 
-          {/* Every legal page ships with placeholders until the owner supplies data. */}
-          <p className="mt-8 rounded-card border border-signal/35 bg-signal/[0.06] p-5 text-sm leading-relaxed text-muted">
-            <span className="font-semibold text-cloud">
-              Hinweis zum Bearbeitungsstand:{" "}
-            </span>
-            Alle in eckigen Klammern gesetzten Angaben sind Platzhalter und müssen
-            vor der Veröffentlichung durch den Betreiber ergänzt werden. Diese
-            Seite ersetzt keine Rechtsberatung und sollte vor dem Livegang
-            fachlich geprüft werden.
-          </p>
+          {/*
+            The "Hinweis zum Bearbeitungsstand" banner that used to sit here was
+            an internal working note aimed at the owner, not the visitor. It was
+            removed for launch along with the last bracketed placeholder.
+          */}
 
           <div className="mt-14 space-y-12">{children}</div>
         </div>
@@ -94,17 +89,4 @@ export function LegalList({ items }: { items: readonly ReactNode[] }) {
 /** A supplied, final value inside body copy. */
 export function Value({ children }: { children: ReactNode }) {
   return <strong className="font-semibold text-cloud">{children}</strong>;
-}
-
-/**
- * An outstanding owner input. Marked distinctly from supplied values so the
- * remaining gaps cannot be mistaken for finished content — the bracketed
- * "ERGÄNZEN" wording carries the meaning without relying on colour.
- */
-export function Placeholder({ children }: { children: ReactNode }) {
-  return (
-    <mark className="rounded-[4px] bg-signal/15 px-1.5 py-0.5 font-semibold text-signal">
-      {children}
-    </mark>
-  );
 }

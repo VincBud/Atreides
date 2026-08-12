@@ -29,9 +29,15 @@ export const metadata: Metadata = {
 
 /**
  * This page describes the site exactly as it behaves today: hosted on Vercel,
- * no analytics, no tracking cookies, self-hosted fonts, and a contact form that
- * posts to /api/contact and is delivered by Resend to a Google mailbox, with
- * Cloudflare Turnstile guarding it. Revise it the moment any of that changes.
+ * no analytics, no cookies on our own domain, self-hosted fonts, and a contact
+ * form that posts to /api/contact and is delivered by Resend to a Google
+ * mailbox, with Cloudflare Turnstile guarding it.
+ *
+ * The Turnstile wording in section 5 reflects measured production behaviour
+ * (Managed widget, pre-clearance disabled): no cookies and no storage under
+ * atreides-security.com, but a temporary third-party session-storage entry in
+ * the challenges.cloudflare.com context. Do not simplify that to "no storage"
+ * or to "cookies are used" — neither is true. Re-measure before changing it.
  */
 export default function DatenschutzPage() {
   return (
@@ -68,14 +74,13 @@ export default function DatenschutzPage() {
       <LegalSection heading="2. Umfang der Verarbeitung auf dieser Website">
         <p>
           Diese Website ist eine statische Informationsseite. Es findet kein
-          Tracking statt, es werden keine Analyse- oder Marketingdienste
-          eingebunden und es werden keine Cookies zu Analyse- oder Werbezwecken
-          gesetzt.
+          Tracking statt und es werden keine Analyse- oder Marketingdienste
+          eingebunden.
         </p>
         <LegalList
           items={[
             "Keine Webanalyse und keine Reichweitenmessung.",
-            "Keine Werbe- oder Tracking-Cookies.",
+            "Es werden keine Cookies auf atreides-security.com gesetzt.",
             "Keine Social-Media-Plugins, Karten- oder Videodienste.",
             "Kein Newsletter, kein Profiling, keine Weitergabe zu Werbezwecken.",
           ]}
@@ -83,12 +88,14 @@ export default function DatenschutzPage() {
         <p>
           Eine Ausnahme bildet das Kontaktformular: Dort wird zum Schutz vor
           automatisiertem Missbrauch der Dienst Cloudflare Turnstile eingebunden.
-          Details dazu finden Sie in Abschnitt 5.
+          Welche Daten dabei verarbeitet werden und welche Speichervorgänge im
+          Browser auftreten können, ist in Abschnitt 5 beschrieben.
         </p>
         <p>
-          Da keine Analyse- oder Marketingdienste eingesetzt werden, wird kein
-          Einwilligungsbanner verwendet. Sollten künftig einwilligungspflichtige
-          Dienste ergänzt werden, ist diese Erklärung entsprechend zu erweitern.
+          Analyse-, Marketing- und Tracking-Dienste werden nicht eingesetzt; ein
+          Einwilligungsbanner für solche Dienste wird daher nicht angezeigt.
+          Sollten künftig einwilligungspflichtige Dienste ergänzt werden, ist
+          diese Erklärung entsprechend zu erweitern.
         </p>
       </LegalSection>
 
@@ -170,14 +177,30 @@ export default function DatenschutzPage() {
         </p>
         <p>
           <b className="font-semibold text-cloud">Missbrauchsschutz:</b> Zum Schutz
-          vor automatisierten Einsendungen setzen wir Cloudflare Turnstile ein.
-          Beim Aufruf des Formulars wird dazu ein Skript von Cloudflare geladen und
-          es werden technische Daten Ihres Browsers — darunter Ihre IP-Adresse — an
-          Cloudflare übertragen und dort geprüft. Ohne diese Prüfung kann das
-          Formular nicht abgesendet werden. Rechtsgrundlage ist Art. 6 Abs. 1
-          lit. f DSGVO; das berechtigte Interesse liegt in der Abwehr von Spam und
-          automatisiertem Missbrauch. Alternativ können Sie uns jederzeit
-          formlos per E-Mail schreiben.
+          vor automatisierten Einsendungen setzen wir Cloudflare Turnstile ein. Der
+          Dienst dient ausschließlich der technischen Abwehr von Bots und
+          Missbrauch des Kontaktformulars. Er wird nicht zur Analyse Ihres
+          Verhaltens, nicht zur Wiedererkennung über Websites hinweg und nicht zu
+          Werbezwecken eingesetzt.
+        </p>
+        <p>
+          Beim Aufruf des Formulars wird dazu ein Skript von Cloudflare geladen.
+          Für die Prüfung verarbeitet Cloudflare technische Informationen zu Ihrem
+          Browser und Endgerät sowie Angaben zur Interaktion mit dem Formular;
+          dazu gehört auch Ihre IP-Adresse.
+        </p>
+        <p>
+          Im Rahmen dieser Prüfung kann Cloudflare vorübergehend Daten im Browser
+          ablegen — etwa im Sitzungsspeicher. Diese Speicherung erfolgt technisch
+          im Kontext von Cloudflare (challenges.cloudflare.com), nicht unter
+          atreides-security.com, und ist auf die laufende Browsersitzung begrenzt.
+          In der derzeitigen Konfiguration werden dabei keine Cookies gesetzt.
+        </p>
+        <p>
+          Ohne diese Prüfung kann das Formular nicht abgesendet werden.
+          Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; das berechtigte Interesse
+          liegt in der Abwehr von Spam und automatisiertem Missbrauch. Alternativ
+          können Sie uns jederzeit formlos per E-Mail schreiben.
         </p>
         <p>
           Wir löschen Ihre Anfrage, sobald sie für die Zweckerreichung nicht mehr

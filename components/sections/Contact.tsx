@@ -36,8 +36,7 @@ export function Contact() {
           <div className="mt-10 rounded-card border border-steel/40 bg-panel/40 p-5">
             <h3 className="text-eyebrow text-subtle">Direkter Kontakt</h3>
             <p className="mt-3 text-sm leading-relaxed text-muted">
-              Solange das Formular noch nicht verbunden ist, erreichen Sie uns
-              direkt per E-Mail:
+              Sie erreichen uns auch ohne Formular direkt per E-Mail:
             </p>
             <a
               href={`mailto:${owner.email}`}

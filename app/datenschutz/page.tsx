@@ -24,16 +24,16 @@ export const metadata: Metadata = {
 };
 
 /**
- * This page describes the site exactly as it behaves today: a static site on
- * Vercel with no analytics, no cookies, self-hosted fonts and a contact form
- * whose submit path is not connected. It must be revised the moment a form
- * backend or any additional service is added.
+ * This page describes the site exactly as it behaves today: hosted on Vercel,
+ * no analytics, no tracking cookies, self-hosted fonts, and a contact form that
+ * posts to /api/contact and is delivered by Resend to a Google mailbox, with
+ * Cloudflare Turnstile guarding it. Revise it the moment any of that changes.
  */
 export default function DatenschutzPage() {
   return (
     <LegalLayout
       title="Datenschutzerklärung"
-      intro="Diese Erklärung beschreibt, welche Daten beim Besuch dieser Website verarbeitet werden. Sie bildet den aktuellen technischen Stand der Website ab und ist bei Änderungen an Hosting oder Kontaktformular anzupassen."
+      intro="Diese Erklärung beschreibt, welche Daten beim Besuch dieser Website und bei der Nutzung des Kontaktformulars verarbeitet werden. Sie bildet den aktuellen technischen Stand der Website ab."
     >
       <LegalSection heading="1. Verantwortliche Stelle">
         <p>
@@ -72,14 +72,19 @@ export default function DatenschutzPage() {
           items={[
             "Keine Webanalyse und keine Reichweitenmessung.",
             "Keine Werbe- oder Tracking-Cookies.",
-            "Keine Einbindung externer Skripte, Karten oder Videodienste.",
-            "Keine Social-Media-Plugins.",
+            "Keine Social-Media-Plugins, Karten- oder Videodienste.",
+            "Kein Newsletter, kein Profiling, keine Weitergabe zu Werbezwecken.",
           ]}
         />
         <p>
-          Aus diesem Grund wird kein Cookie-Banner eingesetzt. Sollten künftig
-          einwilligungspflichtige Dienste ergänzt werden, ist diese Erklärung
-          entsprechend zu erweitern.
+          Eine Ausnahme bildet das Kontaktformular: Dort wird zum Schutz vor
+          automatisiertem Missbrauch der Dienst Cloudflare Turnstile eingebunden.
+          Details dazu finden Sie in Abschnitt 5.
+        </p>
+        <p>
+          Da keine Analyse- oder Marketingdienste eingesetzt werden, wird kein
+          Einwilligungsbanner verwendet. Sollten künftig einwilligungspflichtige
+          Dienste ergänzt werden, ist diese Erklärung entsprechend zu erweitern.
         </p>
       </LegalSection>
 
@@ -93,9 +98,10 @@ export default function DatenschutzPage() {
       <LegalSection heading="3. Hosting und Zugriffsdaten">
         <p>
           Diese Website wird bei <Value>{hosting.provider}</Value> gehostet. Der
-          Hosting-Anbieter stellt die Website technisch bereit und verarbeitet
-          dabei die Daten, die Ihr Browser beim Aufruf automatisch übermittelt.
-          Dazu gehören typischerweise:
+          Hosting-Anbieter stellt die Website und die Serverfunktion des
+          Kontaktformulars technisch bereit und verarbeitet dabei die Daten, die
+          Ihr Browser beim Aufruf automatisch übermittelt. Dazu gehören
+          typischerweise:
         </p>
         <LegalList
           items={[
@@ -112,8 +118,9 @@ export default function DatenschutzPage() {
         </p>
         <p>
           Diese Zugriffsdaten werden von uns weder gespeichert noch ausgewertet.
-          Wir betreiben keine eigene Protokollierung, keine Analyse und keine
-          serverseitige Verarbeitung von Besucherdaten.
+          Wir betreiben keine eigene Protokollierung und keine Analyse von
+          Besucherdaten. Eine serverseitige Verarbeitung findet ausschließlich
+          beim Absenden des Kontaktformulars statt (siehe Abschnitt 5).
         </p>
       </LegalSection>
 
@@ -127,13 +134,51 @@ export default function DatenschutzPage() {
 
       <LegalSection heading="5. Kontaktformular">
         <p>
-          Das auf der Startseite dargestellte Kontaktformular ist derzeit technisch
-          nicht angebunden. Eingaben werden ausschließlich im Browser verarbeitet,
-          nicht an einen Server übermittelt und nicht gespeichert.
+          Über das Kontaktformular auf der Startseite können Sie uns eine Anfrage
+          senden. Dabei werden die folgenden Angaben verarbeitet:
+        </p>
+        <LegalList
+          items={[
+            "Name",
+            "Unternehmen",
+            "Geschäftliche E-Mail-Adresse",
+            "Art der Venue",
+            "Anzahl der Kameras (freiwillige Angabe)",
+            "Ihre Nachricht",
+            "Bestätigung, dass Sie diese Datenschutzerklärung zur Kenntnis genommen haben",
+          ]}
+        />
+        <p>
+          Die Angaben werden verwendet, um Ihre Anfrage zu bearbeiten und zu
+          beantworten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit die
+          Anfrage auf eine mögliche Zusammenarbeit gerichtet ist, andernfalls
+          Art. 6 Abs. 1 lit. f DSGVO aufgrund unseres berechtigten Interesses an
+          der Beantwortung von Anfragen. Die Angabe der Daten ist freiwillig; ohne
+          sie können wir die Anfrage jedoch nicht bearbeiten.
         </p>
         <p>
-          Sobald ein Versandweg eingerichtet ist, wird diese Erklärung um Empfänger,
-          Rechtsgrundlage, Speicherdauer und eingesetzte Dienstleister ergänzt.
+          <b className="font-semibold text-cloud">Ablauf der Übermittlung:</b> Ihre
+          Eingaben werden an eine Serverfunktion dieser Website übertragen, dort
+          geprüft und anschließend über den E-Mail-Dienst Resend als E-Mail an unser
+          Postfach gesendet. Das empfangende Postfach ist ein Google-Mail-Konto; die
+          Anfrage wird dort gespeichert. Es findet keine Speicherung in einer
+          Datenbank statt, und es wird kein Profil zu Ihrer Person angelegt.
+        </p>
+        <p>
+          <b className="font-semibold text-cloud">Missbrauchsschutz:</b> Zum Schutz
+          vor automatisierten Einsendungen setzen wir Cloudflare Turnstile ein.
+          Beim Aufruf des Formulars wird dazu ein Skript von Cloudflare geladen und
+          es werden technische Daten Ihres Browsers — darunter Ihre IP-Adresse — an
+          Cloudflare übertragen und dort geprüft. Ohne diese Prüfung kann das
+          Formular nicht abgesendet werden. Rechtsgrundlage ist Art. 6 Abs. 1
+          lit. f DSGVO; das berechtigte Interesse liegt in der Abwehr von Spam und
+          automatisiertem Missbrauch. Alternativ können Sie uns jederzeit
+          formlos per E-Mail schreiben.
+        </p>
+        <p>
+          Wir löschen Ihre Anfrage, sobald sie für die Zweckerreichung nicht mehr
+          erforderlich ist und keine gesetzlichen Aufbewahrungsfristen
+          entgegenstehen.
         </p>
       </LegalSection>
 
@@ -152,12 +197,48 @@ export default function DatenschutzPage() {
         </p>
       </LegalSection>
 
-      <LegalSection heading="7. Weitergabe von Daten">
-        {/* No claim about a processing agreement: its existence is unverified. */}
+      {/*
+        Names the providers and their roles — all verifiable from the code. It
+        deliberately makes no claim about processing agreements, certifications
+        or Art. 44 transfer mechanisms, none of which have been confirmed.
+        See the note on `hosting` in lib/site.ts.
+      */}
+      <LegalSection heading="7. Empfänger und eingesetzte Dienste">
         <p>
-          Eine Weitergabe Ihrer Daten an Dritte erfolgt nicht. Ausgenommen ist der
-          Hosting-Anbieter, der die Website technisch bereitstellt, sowie eine
-          Weitergabe aufgrund gesetzlicher Verpflichtungen.
+          Eine Weitergabe Ihrer Daten zu Werbezwecken oder an unbeteiligte Dritte
+          findet nicht statt. An der technischen Bereitstellung dieser Website und
+          an der Bearbeitung von Anfragen sind folgende Dienste beteiligt:
+        </p>
+        <LegalList
+          items={[
+            <>
+              <b className="font-semibold text-cloud">Vercel</b> — Hosting der
+              Website und Ausführung der Serverfunktion des Kontaktformulars.
+            </>,
+            <>
+              <b className="font-semibold text-cloud">Resend</b> — Versand der
+              Anfrage-E-Mail an unser Postfach.
+            </>,
+            <>
+              <b className="font-semibold text-cloud">Cloudflare</b> — Turnstile
+              zum Schutz des Formulars vor automatisiertem Missbrauch.
+            </>,
+            <>
+              <b className="font-semibold text-cloud">Google</b> — Betreiber des
+              E-Mail-Postfachs, in dem eingehende Anfragen empfangen und
+              gespeichert werden.
+            </>,
+          ]}
+        />
+        <p>
+          Für die Verarbeitung durch diese Anbieter gelten jeweils deren eigene
+          Datenschutzbestimmungen. Darüber hinaus erfolgt eine Weitergabe nur,
+          soweit wir gesetzlich dazu verpflichtet sind.
+        </p>
+        <p>
+          Die genannten Anbieter sind US-Unternehmen oder mit US-Unternehmen
+          verbunden. Eine Verarbeitung personenbezogener Daten in den USA ist
+          daher möglich.
         </p>
       </LegalSection>
 

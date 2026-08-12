@@ -59,7 +59,7 @@ export const hosting = {
  * Static on purpose: deriving it from the current date would silently claim the
  * documents were reviewed on every request.
  */
-export const legalLastUpdated = "10. August 2026";
+export const legalLastUpdated = "12. August 2026";
 
 export type NavItem = {
   label: string;

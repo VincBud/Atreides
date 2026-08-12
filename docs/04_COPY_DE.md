@@ -362,9 +362,27 @@ Sie betreiben eine Venue, planen Großveranstaltungen oder verantworten ein Secu
 
 Anfrage senden
 
-### Temporary form notice
+### Form states
 
-`Das Kontaktformular wird derzeit technisch vorbereitet. Bis zur Freigabe der Versandlogik werden keine Angaben übertragen.`
+Live since 2026-08-11. The temporary "no data is transmitted" notice has been
+removed — it is no longer true.
+
+Success: `Vielen Dank. Ihre Anfrage wurde übermittelt. Wir melden uns bei Ihnen.`
+plus `Sie erhalten keine automatische Bestätigungsmail. Bei Rückfragen antworten
+wir direkt an die angegebene Adresse.`
+
+Submitting: `Wird gesendet …` (button disabled)
+
+Send failure: `Die Anfrage konnte nicht übermittelt werden. Bitte versuchen Sie
+es erneut oder schreiben Sie uns direkt per E-Mail.`
+
+Turnstile expired: `Die Sicherheitsprüfung ist abgelaufen. Bitte senden Sie das
+Formular erneut.`
+
+Spam-protection notice under the button: `Dieses Formular ist durch Cloudflare
+Turnstile vor Missbrauch geschützt. Details in der Datenschutzerklärung.`
+
+Provider errors are never shown to the visitor.
 
 ## Footer
 

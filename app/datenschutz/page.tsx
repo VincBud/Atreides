@@ -15,11 +15,15 @@ export const metadata: Metadata = {
   title: "Datenschutzerklärung",
   description,
   alternates: { canonical: "/datenschutz" },
-  // Without these, the page would inherit the landing page's Open Graph title.
+  // Without these, the page would inherit the landing page's social titles.
   openGraph: {
     title: `Datenschutzerklärung — ${siteConfig.name}`,
     description,
     url: "/datenschutz",
+  },
+  twitter: {
+    title: `Datenschutzerklärung — ${siteConfig.name}`,
+    description,
   },
 };
 

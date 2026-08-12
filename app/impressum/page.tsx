@@ -15,11 +15,15 @@ export const metadata: Metadata = {
   title: "Impressum",
   description,
   alternates: { canonical: "/impressum" },
-  // Without these, the page would inherit the landing page's Open Graph title.
+  // Without these, the page would inherit the landing page's social titles.
   openGraph: {
     title: `Impressum — ${siteConfig.name}`,
     description,
     url: "/impressum",
+  },
+  twitter: {
+    title: `Impressum — ${siteConfig.name}`,
+    description,
   },
 };
 
